@@ -9,6 +9,14 @@ public class GOAPAgent : MonoBehaviour
 
     private GOAPPlanner planner;
     private Queue<GOAPAction> actionQueue;
+
+    public GOAPAction CurrentAction
+    {
+        get
+        {
+            return currentAction;
+        }
+    }
     private GOAPAction currentAction;
 
     // Initialization
@@ -16,7 +24,6 @@ public class GOAPAgent : MonoBehaviour
     {
         planner = new GOAPPlanner();
         availableActions = new HashSet<GOAPAction>(GetComponents<GOAPAction>());
-        Plan();
     }
 
     // Update loop

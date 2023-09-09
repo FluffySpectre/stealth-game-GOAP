@@ -1949,6 +1949,7 @@ GameObject:
   - component: {fileID: 669854072}
   - component: {fileID: 669854073}
   - component: {fileID: 669854076}
+  - component: {fileID: 669854077}
   - component: {fileID: 669854075}
   m_Layer: 0
   m_Name: Guard#1
@@ -2020,9 +2021,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f27feff118094f198953e6da0c59f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 1
+  cost: 0.9
   target: {fileID: 0}
-  duration: 0
   waypoints:
   - {fileID: 1406294464}
   - {fileID: 734641918}
@@ -2071,9 +2071,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad194ddb1e8142d6a0ac69116519059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 0.5
+  target: {fileID: 0}
+--- !u!114 &669854077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669854067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f658977f56604feeac96283143ac425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   cost: 1
   target: {fileID: 0}
-  duration: 0
 --- !u!1 &680460004
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DisplayWorldState : MonoBehaviour
+public class DisplayGOAPAgentState : MonoBehaviour
 {
     public GOAPAgent goapAgent;
     private TMP_Text text;
@@ -17,8 +17,18 @@ public class DisplayWorldState : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        text.text = "World State:\n" + GetWorldStateString() + "\n\n";
+        text.text = "Current Action: " + GetCurrentActionNameString() + "\n\n";
+        text.text += "World State:\n" + GetWorldStateString() + "\n";
         text.text += "Goal State:\n" + GetGoalStateString();
+    }
+
+    private string GetCurrentActionNameString()
+    {
+        if (goapAgent.CurrentAction)
+        {
+            return goapAgent.CurrentAction.GetType().ToString();
+        }
+        return "- NO ACTION ACTIVE -";
     }
 
     private string GetWorldStateString()

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1800
     height: 1126
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 150}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 19
+  controlID: 29
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 150}
   m_MaxSize: {x: 16192, y: 24288}
   vertical: 1
-  controlID: 20
+  controlID: 30
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 0
-  controlID: 21
+  controlID: 31
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -436,7 +436,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 28010
+  m_LastSelectedObjectID: 28210
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -556,7 +556,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/AI/GOAP
+    - Assets/Scripts/AI/GOAP/Utilities
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -597,24 +597,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 98.49573}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000005471000056710000587100005a7100005c7100005e710000607100006271000064710000
+    m_ExpandedIDs: ffffffff000000005471000056710000587100005a7100005c7100005e710000607100006271000064710000a2710000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: DisplayGOAPAgentState
+      m_OriginalName: DisplayGOAPAgentState
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 10914
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -698,7 +698,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 499
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -742,9 +742,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: fc300000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 02fbffff
+      m_SelectedIDs: 326e0000
+      m_LastClickedID: 28210
+      m_ExpandedIDs: 02fbffffce6d00000a6e00007c6e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
