@@ -5,7 +5,6 @@ public abstract class GOAPAction : MonoBehaviour
 {
     public float cost = 1.0f; // Cost of performing the action
     public GameObject target; // A target GameObject, if needed
-    public float duration = 0; // How long does this action take?
 
     // State conditions that must be met to execute this action.
     public Dictionary<string, int> preconditions;

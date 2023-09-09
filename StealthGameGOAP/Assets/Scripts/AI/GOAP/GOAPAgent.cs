@@ -11,55 +11,71 @@ public class GOAPAgent : MonoBehaviour
     private Queue<GOAPAction> actionQueue;
     private GOAPAction currentAction;
 
+    // Initialization
     void Start()
     {
         planner = new GOAPPlanner();
         availableActions = new HashSet<GOAPAction>(GetComponents<GOAPAction>());
+        Plan();
     }
 
+    // Update loop
     void Update()
     {
-        if (actionQueue != null && actionQueue.Count > 0 && currentAction == null)
+        // If we have actions queued, but none currently executing
+        if (HasActionsQueued() && currentAction == null)
         {
-            // Activate the next action.
-            currentAction = actionQueue.Dequeue();
-            currentAction.Activate(gameObject);
+            ActivateNextAction();
         }
 
+        // If we have an action in progress
         if (currentAction != null)
         {
-            GOAPAction.GOAPActionResult result = currentAction.Perform(gameObject);
-
-            if (result == GOAPAction.GOAPActionResult.Completed)
-            {
-                // Action is completed, update world state and plan again.
-                foreach (var effect in currentAction.effects)
-                {
-                    if (!worldState.ContainsKey(effect.Key))
-                    {
-                        worldState.Add(effect.Key, effect.Value);
-                    }
-                    else
-                    {
-                        worldState[effect.Key] = effect.Value;
-                    }
-                }
-
-                currentAction = null;
-                Plan();
-            }
-            else if (result == GOAPAction.GOAPActionResult.Failed)
-            {
-                // Action has failed, plan again.
-                Plan();
-            }
+            EvaluateCurrentAction();
         }
 
-        // TODO: Fix me
-        if ((actionQueue == null || actionQueue.Count == 0) && currentAction == null)
+        // If there are no actions planned or in progress
+        // plan again
+        if (!HasActionsQueued() && currentAction == null)
         {
             Plan();
         }
+    }
+
+    private void ActivateNextAction()
+    {
+        currentAction = actionQueue.Dequeue();
+        currentAction.Activate(gameObject);
+    }
+
+    private void EvaluateCurrentAction()
+    {
+        GOAPAction.GOAPActionResult result = currentAction.Perform(gameObject);
+
+        if (result == GOAPAction.GOAPActionResult.Completed)
+        {
+            UpdateWorldState();
+            currentAction = null;
+            Plan();
+        }
+        else if (result == GOAPAction.GOAPActionResult.Failed)
+        {
+            currentAction = null;
+            Plan();
+        }
+    }
+
+    private void UpdateWorldState()
+    {
+        foreach (var effect in currentAction.effects)
+        {
+            worldState[effect.Key] = effect.Value;
+        }
+    }
+
+    private bool HasActionsQueued()
+    {
+        return actionQueue != null && actionQueue.Count > 0;
     }
 
     private void Plan()
