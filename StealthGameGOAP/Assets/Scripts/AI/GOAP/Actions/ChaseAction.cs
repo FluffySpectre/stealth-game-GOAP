@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PatrolAction : GOAPAction
+public class ChaseAction : GOAPAction
 {
-    public Transform[] waypoints;  // The waypoints for patrol
-    private int nextWaypoint;      // Index of the next waypoint
-    private NavMeshAgent agent;    // Reference to the NavMeshAgent
+    private NavMeshAgent agent;      // Reference to the NavMeshAgent
 
     public override void ResetAction()
     {
@@ -15,11 +13,10 @@ public class PatrolAction : GOAPAction
 
     public override bool CheckProceduralPrecondition(GameObject agent)
     {
-        // We can always patrol, assuming there are waypoints
-        if (waypoints.Length > 0)
+        // Only chase if a target is seen
+        if (agent.GetComponent<GOAPAgent>().worldState["seesTarget"] == 1)
         {
-            target = waypoints[nextWaypoint].gameObject;
-            nextWaypoint = (nextWaypoint + 1) % waypoints.Length;
+            target = agent.GetComponent<VisionSensor>().Target;
             return true;
         }
         return false;
@@ -39,10 +36,11 @@ public class PatrolAction : GOAPAction
             return GOAPActionResult.Failed;
         }
 
+        // Set destination
         this.agent.SetDestination(target.transform.position);
 
-        // Check if the agent has arrived at the waypoint
-        if (!this.agent.pathPending && this.agent.remainingDistance <= this.agent.stoppingDistance)
+        // Check if the agent has caught the target
+        if (!this.agent.pathPending && Vector3.Distance(agent.transform.position, target.transform.position) <= this.agent.stoppingDistance)
         {
             return GOAPActionResult.Completed;
         }
@@ -52,16 +50,16 @@ public class PatrolAction : GOAPAction
 
     void Start()
     {
-        // Initialize preconditions and effects for patrolling
+        // Initialize preconditions and effects for chasing
         preconditions = new Dictionary<string, int>
         {
-            { "seesTarget", 0 },
-            { "hearsNoise", 0 }
+            { "seesTarget", 1 },
+            // { "vigilance", 1 } // For example, we might require high vigilance here
         };
 
         effects = new Dictionary<string, int>
         {
-            { "vigilance", 1 }
+            { "catchTarget", 1 }
         };
     }
 }

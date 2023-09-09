@@ -8,7 +8,7 @@ public class GOAPPlanner
         // Reset all actions
         foreach (GOAPAction a in availableActions)
         {
-            a.Reset();
+            a.ResetAction();
         }
 
         // Check which actions can run using their CheckProceduralPrecondition
@@ -30,7 +30,7 @@ public class GOAPPlanner
 
         if (!success)
         {
-            Debug.LogError("NO PLAN");
+            // Debug.LogError("NO PLAN");
             return null;
         }
 
