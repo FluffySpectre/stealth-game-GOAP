@@ -29,6 +29,13 @@ public class GOAPAgent : MonoBehaviour
     // Update loop
     void Update()
     {
+        // If there are no actions planned or in progress
+        // plan again
+        if (!HasActionsQueued() && currentAction == null)
+        {
+            Plan();
+        }
+        
         // If we have actions queued, but none currently executing
         if (HasActionsQueued() && currentAction == null)
         {
@@ -39,13 +46,6 @@ public class GOAPAgent : MonoBehaviour
         if (currentAction != null)
         {
             EvaluateCurrentAction();
-        }
-
-        // If there are no actions planned or in progress
-        // plan again
-        if (!HasActionsQueued() && currentAction == null)
-        {
-            Plan();
         }
     }
 

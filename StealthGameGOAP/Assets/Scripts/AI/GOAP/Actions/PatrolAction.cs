@@ -18,8 +18,6 @@ public class PatrolAction : GOAPAction
         // We can always patrol, assuming there are waypoints
         if (waypoints.Length > 0)
         {
-            target = waypoints[nextWaypoint].gameObject;
-            nextWaypoint = (nextWaypoint + 1) % waypoints.Length;
             return true;
         }
         return false;
@@ -29,6 +27,16 @@ public class PatrolAction : GOAPAction
     {
         // Initialize NavMeshAgent
         this.agent = agent.GetComponent<NavMeshAgent>();
+
+        if (waypoints.Length > 0)
+        {
+            target = waypoints[nextWaypoint].gameObject;
+            nextWaypoint = (nextWaypoint + 1) % waypoints.Length;
+        }
+        else
+        {
+            Debug.LogError("No waypoints set for patrolling.");
+        }
     }
 
     public override GOAPActionResult Perform(GameObject agent)
@@ -42,7 +50,7 @@ public class PatrolAction : GOAPAction
         this.agent.SetDestination(target.transform.position);
 
         // Check if the agent has arrived at the waypoint
-        if (!this.agent.pathPending && this.agent.remainingDistance <= this.agent.stoppingDistance)
+        if (Vector3.Distance(agent.transform.position, target.transform.position) <= this.agent.stoppingDistance)
         {
             return GOAPActionResult.Completed;
         }
@@ -61,7 +69,7 @@ public class PatrolAction : GOAPAction
 
         effects = new Dictionary<string, int>
         {
-            { "vigilance", 1 }
+            { "vigilance", 0 }
         };
     }
 }

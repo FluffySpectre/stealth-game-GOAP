@@ -16,7 +16,6 @@ public class ChaseAction : GOAPAction
         // Only chase if a target is seen
         if (agent.GetComponent<GOAPAgent>().worldState["seesTarget"] == 1)
         {
-            target = agent.GetComponent<VisionSensor>().Target;
             return true;
         }
         return false;
@@ -26,6 +25,9 @@ public class ChaseAction : GOAPAction
     {
         // Initialize NavMeshAgent
         this.agent = agent.GetComponent<NavMeshAgent>();
+
+        // TODO: Make this more generic
+        target = agent.GetComponent<VisionSensor>().Target;
     }
 
     public override GOAPActionResult Perform(GameObject agent)
@@ -40,7 +42,7 @@ public class ChaseAction : GOAPAction
         this.agent.SetDestination(target.transform.position);
 
         // Check if the agent has caught the target
-        if (!this.agent.pathPending && Vector3.Distance(agent.transform.position, target.transform.position) <= this.agent.stoppingDistance)
+        if (Vector3.Distance(agent.transform.position, target.transform.position) <= this.agent.stoppingDistance)
         {
             return GOAPActionResult.Completed;
         }
@@ -54,6 +56,7 @@ public class ChaseAction : GOAPAction
         preconditions = new Dictionary<string, int>
         {
             { "seesTarget", 1 },
+            { "catchTarget", 0 }
             // { "vigilance", 1 } // For example, we might require high vigilance here
         };
 
